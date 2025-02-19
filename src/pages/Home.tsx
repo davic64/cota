@@ -2,7 +2,7 @@ import { Card } from "@/components/ui/card";
 export const Home = () => {
   return (
     <>
-      <div className="py-4 px-10 space-y-4">
+      <div className="space-y-4">
         <Card className="hover:scale-101 transition-all duration-500 hover:shadow-lg p-4 flex items-center justify-between cursor-pointer">
           <div>
             <p className="font-bold text-xl">
