@@ -1,12 +1,20 @@
+import { DatePicker } from "@/components/ui/datePicker";
 import { Input } from "@/components/ui/input";
 import { Customer } from "@/types/quotation.types";
 
 interface ClientFormProps {
   customer: Customer;
   onChange: (updatedClient: Customer) => void;
+  selectedDate: Date | undefined;
+  onDateChange: (date: Date | undefined) => void;
 }
 
-export const ClientForm = ({ customer, onChange }: ClientFormProps) => {
+export const ClientForm = ({
+  customer,
+  onChange,
+  selectedDate,
+  onDateChange,
+}: ClientFormProps) => {
   const handleChange = (field: keyof Customer, value: string) => {
     onChange({ ...customer, [field]: value });
   };
@@ -46,19 +54,21 @@ export const ClientForm = ({ customer, onChange }: ClientFormProps) => {
         />
       </div>
       <div>
-        {/* TODO: Cambiar por DatePicker */}
         <p>Fecha de cotización *</p>
-        <Input
-          type="date"
-          value={customer.dateQuote}
-          onChange={(e) => handleChange("dateQuote", e.target.value)}
+        <DatePicker
+          placeholder="Selecciona una fecha"
+          onDateChange={onDateChange}
+          selected={selectedDate}
         />
       </div>
       <div>
         <p>RFC</p>
         <Input
+          className="uppercase"
           placeholder="ABCD1234561A2"
-          value={customer.rfc}
+          value={customer.rfc.toUpperCase()}
+          min={11}
+          max={12}
           onChange={(e) => handleChange("rfc", e.target.value)}
         />
       </div>

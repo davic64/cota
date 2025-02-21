@@ -14,7 +14,7 @@ const Header = () => {
   const title = currentRoute?.handle?.title;
 
   return (
-    <div className="grid grid-cols-3 pt-10 pb-6 px-6 items-center bg-white fixed w-full leading-0 z-10">
+    <div className="grid grid-cols-3 pt-12 pb-6 px-6 items-center bg-white fixed w-full leading-0 z-10">
       <div className="justify-self-start">
         <p className="font-extrabold text-3xl">{"[[cota"}</p>
       </div>

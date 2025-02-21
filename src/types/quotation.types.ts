@@ -1,4 +1,5 @@
 export interface Product {
+  no?: string;
   id: string;
   name: string;
   quantity: number;
@@ -13,4 +14,10 @@ export interface Customer {
   phone: string;
   dateQuote: string;
   rfc: string;
+}
+
+export interface QuoteData {
+  no: string;
+  customerData: Customer;
+  productsData: Product[];
 }

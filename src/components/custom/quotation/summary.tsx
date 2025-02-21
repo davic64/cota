@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { getTotal } from "@/lib/getTotal";
 import { Customer, Product } from "@/types/quotation.types";
 
 interface SummaryProps {
@@ -14,13 +15,7 @@ interface SummaryProps {
 }
 
 export const Summary = ({ customer, products }: SummaryProps) => {
-  const totalGeneral = products.reduce((acc, product) => {
-    const totalProducto =
-      product.quantity * product.price * (1 - product.discount / 100);
-    return acc + totalProducto;
-  }, 0);
-
-  const ivaTax = totalGeneral * 0.16;
+  const ivaTax = getTotal(products) * 0.16;
 
   return (
     <div className="space-y-10">
@@ -66,7 +61,7 @@ export const Summary = ({ customer, products }: SummaryProps) => {
             </TableHeader>
             <TableBody>
               {products.map((product) => (
-                <TableRow>
+                <TableRow key={product.id}>
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.quantity}</TableCell>
                   <TableCell>$ {product.price}</TableCell>
@@ -86,14 +81,14 @@ export const Summary = ({ customer, products }: SummaryProps) => {
       <div className="justify-self-end text-lg">
         <p>
           <span className="font-bold">Subtotal:</span> ${" "}
-          {totalGeneral.toFixed(2)}
+          {getTotal(products).toFixed(2)}
         </p>
         <p>
           <span className="font-bold">IVA (16%):</span> $ {ivaTax.toFixed(2)}
         </p>
         <p>
           <span className="font-bold">Total:</span> ${" "}
-          {(totalGeneral + ivaTax).toFixed(2)}
+          {(getTotal(products) + ivaTax).toFixed(2)}
         </p>
       </div>
     </div>
