@@ -17,6 +17,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { formatNumber } from "@/lib/numbersUtils";
 
 export const Home = () => {
   const [quotes, setQuotes] = useState<QuoteData[]>([]);
@@ -64,7 +65,7 @@ export const Home = () => {
                     })}
                   </TableCell>
                   <TableCell>
-                    $ {getTotal(quote.productsData).toFixed(2)}
+                    $ {formatNumber(getTotal(quote.productsData))}
                   </TableCell>
                   <TableCell>
                     <Popover>

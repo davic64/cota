@@ -6,7 +6,8 @@ import {
   Summary,
 } from "@/components/custom/quotation";
 import { Button } from "@/components/ui/button";
-import { numberQuote } from "@/lib/createNumberQuote";
+import { numberQuote } from "@/lib/numbersUtils";
+import { validateProducts } from "@/lib/validations";
 
 export const NewQuote = () => {
   const navigate = useNavigate();
@@ -75,7 +76,17 @@ export const NewQuote = () => {
       </div>
 
       <div className="flex items-center gap-2 justify-self-end">
-        <Button onClick={handleSave}>Guardar Cotización</Button>
+        <Button
+          onClick={handleSave}
+          disabled={
+            !customer.name ||
+            !selectedDate ||
+            !customer.phone ||
+            !validateProducts(products)
+          }
+        >
+          Guardar Cotización
+        </Button>
         <Button variant="outline">Generar PDF</Button>
         <Button variant="destructive" onClick={() => navigate("/")}>
           Cancelar

@@ -46,7 +46,7 @@ export const ClientForm = ({
         />
       </div>
       <div>
-        <p>Teléfono</p>
+        <p>Teléfono *</p>
         <Input
           placeholder="0123456789"
           value={customer.phone}
@@ -69,7 +69,7 @@ export const ClientForm = ({
           value={customer.rfc.toUpperCase()}
           min={11}
           max={12}
-          onChange={(e) => handleChange("rfc", e.target.value)}
+          onChange={(e) => handleChange("rfc", e.target.value.toUpperCase())}
         />
       </div>
     </div>

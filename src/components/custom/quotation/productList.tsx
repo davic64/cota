@@ -63,7 +63,8 @@ export const ProductList = ({ products, onChange }: ProductTableProps) => {
                 />
               </TableCell>
               <TableCell>
-                <Input
+                <NumericFormat
+                  customInput={Input}
                   placeholder="0"
                   min={0}
                   value={product.quantity || ""}

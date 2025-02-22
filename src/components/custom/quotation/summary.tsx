@@ -7,6 +7,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { getTotal } from "@/lib/getTotal";
+import { formatNumber } from "@/lib/numbersUtils";
 import { Customer, Product } from "@/types/quotation.types";
 
 interface SummaryProps {
@@ -41,7 +42,7 @@ export const Summary = ({ customer, products }: SummaryProps) => {
             {customer.dateQuote}
           </p>
           <p>
-            <span className="font-bold">RFC:</span> {customer.rfc}
+            <span className="font-bold">RFC:</span> {customer.rfc.toUpperCase()}
           </p>
         </div>
       </div>
@@ -64,13 +65,15 @@ export const Summary = ({ customer, products }: SummaryProps) => {
                 <TableRow key={product.id}>
                   <TableCell>{product.name}</TableCell>
                   <TableCell>{product.quantity}</TableCell>
-                  <TableCell>$ {product.price}</TableCell>
+                  <TableCell>$ {formatNumber(product.price)}</TableCell>
                   <TableCell>{product.discount} %</TableCell>
                   <TableCell>
                     ${" "}
-                    {product.quantity *
-                      product.price *
-                      (1 - product.discount / 100)}
+                    {formatNumber(
+                      product.quantity *
+                        product.price *
+                        (1 - product.discount / 100)
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
@@ -78,17 +81,18 @@ export const Summary = ({ customer, products }: SummaryProps) => {
           </Table>
         </div>
       </div>
+
       <div className="justify-self-end text-lg">
         <p>
           <span className="font-bold">Subtotal:</span> ${" "}
-          {getTotal(products).toFixed(2)}
+          {formatNumber(getTotal(products))}
         </p>
         <p>
-          <span className="font-bold">IVA (16%):</span> $ {ivaTax.toFixed(2)}
+          <span className="font-bold">IVA (16%):</span> $ {formatNumber(ivaTax)}
         </p>
         <p>
           <span className="font-bold">Total:</span> ${" "}
-          {(getTotal(products) + ivaTax).toFixed(2)}
+          {formatNumber(getTotal(products) + ivaTax)}
         </p>
       </div>
     </div>
