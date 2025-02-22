@@ -16,7 +16,9 @@ const Header = () => {
   return (
     <div className="grid grid-cols-3 pt-12 pb-6 px-6 items-center bg-white fixed w-full leading-0 z-10">
       <div className="justify-self-start">
-        <p className="font-extrabold text-3xl">{"[[cota"}</p>
+        <p className="font-extrabold text-3xl">
+          <span className="text-primary">{"[["}</span>cota
+        </p>
       </div>
 
       {shouldShowSearch ? (
